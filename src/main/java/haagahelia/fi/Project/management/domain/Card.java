@@ -22,10 +22,15 @@ public class Card {
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "listId")
-	private CardList cardList;
+	private CardList CardList;
 	
 	public Card() {
 		super();
+	}
+	public Card(String cardName, CardList cardList) {
+		super();
+		this.cardName = cardName;
+		CardList = cardList;
 	}
 	public Long getId() {
 		return id;
@@ -36,11 +41,22 @@ public class Card {
 	public void setCardName(String cardName) {
 		this.cardName = cardName;
 	}
+	public CardList getCardList() {
+		return CardList;
+	}
+	public void setCardList(CardList cardList) {
+		CardList = cardList;
+	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
 	public String getDescription() {
 		return description;
+	}
+	@Override
+	public String toString() {
+		return "Card [id=" + id + ", cardName=" + cardName + ", description=" + description + ", CardList=" + CardList
+				+ "]";
 	}
 	
 }

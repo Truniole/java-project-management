@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <title>Task</title>
+</head>
+
+<body>
+	<header>
+      <h1>Project Management</h1>
+    </header>
+    
+      <div class="new-list">
+        <form>
+          <input type="text" name="title" placeholder="Create a list" autocomplete="off" wrap="soft">
+
+          <button type="submit" class="btn list-btn">
+            Create
+          </button>
+        </form>
+      </div>
+	<!-- <table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Author</th>
+				<th>Title</th>
+				<th>ISBN</th>
+				<th>Year</th>
+				<th>Category</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="list : ${cardLists}">
+				<td th:text="${list.listId}">${list.listId}</td>
+				<td th:text="${list.listName}">${list.listName}</td>
+			</tr>
+		</tbody>
+	</table> -->
+      <div class="all-lists">
+      	
+        <div class="list" th:each="cardList : ${cardLists}">
+          <div class="list-header">
+            <h2 th:text="${cardList.listName}">${cardList.listName}</h2>
+            
+          </div>
+          <ul>
+          <div class="item" th:each="card : ${cardList.cards}">
+              <li th:text="${card.cardName}">${cards.cardName}</li>
+
+              <div>
+                <button class="btn edit-btn">
+                    <i class="fa fa-pencil"></i>
+                </button>
+              </div>
+          </div>
+          </ul>
+			<div class="tools">
+            <form th:object="${newcard}" th:action="@{save}" action="#" method="post">
+              <input type="text" id="description" th:field="*{cardName}" placeholder="Add item">
+              <input type="hidden" name="CardList" id="CardList" th:attr="value = ${cardList.listId}">
+              <button type="submit" class=" btn add-btn" value="Save">Add</button>
+            </form>
+          </div>
+		</div>
+		
+      </div>
+    
+    
+    
+</body>
+
+</html>
